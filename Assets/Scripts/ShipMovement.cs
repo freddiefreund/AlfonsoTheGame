@@ -18,6 +18,8 @@ public class ShipMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.drag = 0.7f;
+        rb.angularDrag = 5f;
     }
 
     void FixedUpdate()
