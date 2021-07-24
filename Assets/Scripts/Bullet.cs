@@ -9,6 +9,11 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] private float speed;
 
+    private void Start()
+    {
+        gameObject.tag = "Bullet";
+    }
+
     void Update()
     {
         transform.Translate(new Vector3(0, speed, 0) * Time.deltaTime);
