@@ -10,17 +10,22 @@ public class PlayerManager : MonoBehaviour
     private PlayerAmmo ammoScript;
     [SerializeField] private TextMeshProUGUI AmmoText;
     [SerializeField] private TextMeshProUGUI HealthText;
+    [SerializeField] private TextMeshProUGUI GoldText;
+    [SerializeField] private int startGold;
+    private int gold;
 
     private void Awake()
     {
         healthScript = GetComponent<HealthScript>();
         ammoScript = GetComponent<PlayerAmmo>();
+        gold = startGold;
     }
 
     void Start()
     {
          UpdateHealthText();
          UpdateAmmoText();
+         UpdateGoldText();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -43,6 +48,16 @@ public class PlayerManager : MonoBehaviour
         UpdateHealthText();
     }
 
+    public int GetPlayerGold()
+    {
+        return gold;
+    }
+
+    public void ChangePlayerGold(int changeVal)
+    {
+        gold += changeVal;
+    }
+
     public int GetPlayerAmmo()
     {
         return ammoScript.GetAmmo();
@@ -62,5 +77,11 @@ public class PlayerManager : MonoBehaviour
     private void UpdateHealthText()
     {
         HealthText.text = "Health: " + healthScript.GetHealth();
+    }
+
+    private void UpdateGoldText()
+    {
+        GoldText.text = "Gold: " + gold;
+        
     }
 }
