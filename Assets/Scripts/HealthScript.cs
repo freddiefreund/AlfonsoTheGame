@@ -27,4 +27,22 @@ public class HealthScript : MonoBehaviour
         //if(health <= 0)
             //die
     }
+
+    public void TakeDamage(int dmg)
+    {
+        health -= dmg;
+    }
+
+    private void OnTriggerEnter2D(Collider2D colider)
+    {
+        Debug.Log(colider.name);
+        Bullet bullet = colider.gameObject.GetComponent(typeof(Bullet)) as Bullet;
+        TakeDamage(bullet.getDamage());
+        Destroy(colider.gameObject);
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
