@@ -378,7 +378,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c064304532205ee43ae6a7ef05bc48ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cd88cfee37487462fa52e2f6ed1b4a8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -406,7 +406,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 7}
+    oldSize: {x: 7.94, y: 11.23}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -427,7 +427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11350f9a7e3f03d418dfe308b32859a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loot: {fileID: 0}
+  lootRandomTreshold: 50
   maxHealth: 10
+  mainShip: 0
+  _listener: {fileID: 0}
+  _rewards: {fileID: 0}
 --- !u!114 &1817453684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,7 +487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6768745295063563328, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 6768745295063563328, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -557,7 +562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6768745295063563328, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.15
+      value: 0.83
       objectReference: {fileID: 0}
     - target: {fileID: 6768745295063563328, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
       propertyPath: m_LocalPosition.z

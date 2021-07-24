@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loot: {fileID: 3140949234010954907, guid: 73720e15efcbe42d78729b740bbad2a8, type: 3}
   lootRandomTreshold: 50
-  maxHealth: 10
+  maxHealth: 30
   mainShip: 0
   _listener: {fileID: 1823543360}
   _rewards: {fileID: 11400000, guid: c6cb3cb34df1d41389bc0cb15d1133e9, type: 2}
@@ -337,7 +337,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootKey: 0
   bullet: {fileID: 0}
-  player: {fileID: 0}
 --- !u!1001 &995062045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -550,6 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  speed: 0
 --- !u!1 &1263130280 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5661265184133851206, guid: a0687d51c084b4437a032eea633bfa97, type: 3}
@@ -569,7 +569,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootKey: 0
   bullet: {fileID: 0}
-  player: {fileID: 0}
 --- !u!1 &1446974186 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5661265184133851206, guid: a0687d51c084b4437a032eea633bfa97, type: 3}
@@ -589,7 +588,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootKey: 101
   bullet: {fileID: 1126911769}
-  player: {fileID: 1823543361}
 --- !u!1 &1823543358 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5661265183421213330, guid: a0687d51c084b4437a032eea633bfa97, type: 3}
@@ -643,9 +641,6 @@ MonoBehaviour:
   rb: {fileID: 0}
   xAxisName: Horizontal
   yAxisName: Vertical
-  AmmoText: {fileID: 0}
-  HealthText: {fileID: 0}
-  healthScript: {fileID: 0}
   accelerationPower: 3
   steeringPower: 0.4
 --- !u!114 &1823543362
@@ -680,7 +675,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootKey: 113
   bullet: {fileID: 1126911769}
-  player: {fileID: 0}
 --- !u!1001 &5661265184839875244
 PrefabInstance:
   m_ObjectHideFlags: 0
