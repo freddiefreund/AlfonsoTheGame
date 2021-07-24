@@ -13,10 +13,15 @@ public class EnemyNavigation : MonoBehaviour
 
     float currentSpeed;
     float topSpeed = 1;
+
+    bool shipTurnedOver180Degrees;
+
+    [SerializeField]
     int currentWaypoint;
 
     public Transform waypointSample;
 
+    [SerializeField]
     List<Transform> Waypoints = new List<Transform>();
 
     float minimumDistanceX = 2;
@@ -28,8 +33,9 @@ public class EnemyNavigation : MonoBehaviour
     [SerializeField]
     Transform NextPos;
 
-    [SerializeField]
-    float accelerationPower = 1f;
+    //[SerializeField]
+    float accelerationPower = 3f;
+
     [SerializeField]
     float steeringPower = 0.4f;
 
@@ -39,7 +45,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         enemyrb = this.GetComponent<Rigidbody2D>();
         CurrentPos = this.GetComponent<Transform>();
-        currentWaypoint = 0;
+        currentWaypoint = 1;
     }
 
     // Update is called once per frame
@@ -55,7 +61,7 @@ public class EnemyNavigation : MonoBehaviour
     void CheckCurrentPos()
     {
 
-        if (Waypoints[0] == null)
+        if (Waypoints[0] == null || Waypoints[Waypoints.Count - 1] == null)
         {
             return;
         }
@@ -63,14 +69,23 @@ public class EnemyNavigation : MonoBehaviour
         if (NextPos == null)
         {
             //NextPos == Waypoints[1];
-            NextPos = Waypoints[0];
+            NextPos = Waypoints[1];
         }
 
-        if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX && 
-            Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY )
+        if(Waypoints[currentWaypoint] != null)
         {
-            NextPos = Waypoints[currentWaypoint +1];
-        }        
+            if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX ||
+                Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+            {
+                currentWaypoint++;
+                NextPos = Waypoints[currentWaypoint];
+            }
+        }  
+        
+        else
+        {
+            return;
+        }
     }
 
     //Find out the current direction of the ship in comparison with the next waypoint.
@@ -86,9 +101,10 @@ public class EnemyNavigation : MonoBehaviour
             enemyrb.AddRelativeForce(Vector2.up * accelerationPower);
         }
 
-        else if(CurrentDirection != 0)
+
+        else if (CurrentDirection > 10)
         {
-            enemyrb.rotation += (steeringPower *  CurrentDirection)/100 ;
+            enemyrb.rotation += (steeringPower * CurrentDirection) / 20;
         }
 
     }
