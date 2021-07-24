@@ -10,22 +10,20 @@ public class EnemyNavigation : MonoBehaviour
     float CurrentDirection;
 
     Vector2 targetDir;
-
-    float currentSpeed;
-    float topSpeed = 1;
-
-    bool shipTurnedOver180Degrees;
+    
+    [SerializeField]
+    bool waypointLeft;
 
     [SerializeField]
     int currentWaypoint;
 
-    public Transform waypointSample;
+    Collider2D WaypointCollider;
 
     [SerializeField]
     List<Transform> Waypoints = new List<Transform>();
 
-    float minimumDistanceX = 2;
-    float minimumDistanceY = 2;
+    float minimumDistanceX = 5;
+    float minimumDistanceY = 5;
 
     [SerializeField]
     Transform CurrentPos;
@@ -53,6 +51,8 @@ public class EnemyNavigation : MonoBehaviour
     {
         CheckCurrentPos();
         MovingShip();
+
+        
     }
 
     //Check's the current position of the ship.
@@ -72,18 +72,277 @@ public class EnemyNavigation : MonoBehaviour
             NextPos = Waypoints[1];
         }
 
-        if(Waypoints[currentWaypoint] != null)
+        //calculating distance between ship and waypoint to decide if the shif should switch to the next waypoint
+
+        if (Waypoints[currentWaypoint] != null /*&& Waypoints[currentWaypoint+1] != null*/)
         {
-            if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX ||
-                Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+            /*
+            if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                   Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
             {
+                waypointLeft = false;
                 currentWaypoint++;
                 NextPos = Waypoints[currentWaypoint];
+                WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                print("case1.1)");
             }
+            */
+
+            if (currentWaypoint == Waypoints.Count - 1)
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    Destroy(this.gameObject);
+                }
+            }
+
+
+            //if both x positions are above or below 0 and y positions are above or below 0
+            if ((CurrentPos.position.x > 0 && NextPos.position.x >0 
+                && CurrentPos.position.y >0 && NextPos.position.y > 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                    print("case1.1)");
+                }
+            }
+
+            else if ((CurrentPos.position.x < 0 && NextPos.position.x < 0 
+                    && CurrentPos.position.y < 0 && NextPos.position.y < 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                    print("case1.2)");
+                }
+            }
+
+            else if ((CurrentPos.position.x > 0 && NextPos.position.x > 0 
+                    && CurrentPos.position.y < 0 && NextPos.position.y < 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                    print("case1.3)");
+                }
+            }
+
+            else if ((CurrentPos.position.x < 0 && NextPos.position.x < 0 
+                    && CurrentPos.position.y > 0 && NextPos.position.y > 0)                    )
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                    print("case1.4)");
+                }
+            }
+
+            //if one of the x positions is above 0 while the other is below 0 while both y values are above or below 0
+
+            else if ((CurrentPos.position.x > 0 && NextPos.position.x < 0) 
+                    && (CurrentPos.position.y > 0 && NextPos.position.y > 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x + NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                    print("case2.1)");
+                }
+            }
+
+            else if ((CurrentPos.position.x > 0 && NextPos.position.x < 0) 
+                    && (CurrentPos.position.y < 0 && NextPos.position.y < 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x + NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                    print("case2.2)");
+                }
+            }
+
+            else if ((CurrentPos.position.x < 0 && NextPos.position.x > 0) 
+                    && (CurrentPos.position.y > 0 && NextPos.position.y > 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x + NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                    print("case2.3)");
+                }
+            }
+
+            else if ((CurrentPos.position.x < 0 && NextPos.position.x > 0) 
+                    && (CurrentPos.position.y < 0 && NextPos.position.y < 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x + NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y - NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+                    print("case2.4)");
+                }
+            }
+
+            //if one of the y positions is above 0 while the other is below 0 while both x values are above or below 0
+
+            else if ((CurrentPos.position.x > 0 && NextPos.position.x > 0)  
+                    && (CurrentPos.position.y > 0 && NextPos.position.y < 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y + NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+
+                    print("case3)");
+                }
+            }
+
+            else if ((CurrentPos.position.x > 0 && NextPos.position.x > 0) 
+                    && (CurrentPos.position.y < 0 && NextPos.position.y > 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y + NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+
+                    print("case3)");
+                }
+            }
+
+            else if ((CurrentPos.position.x < 0 && NextPos.position.x < 0)
+                    && (CurrentPos.position.y > 0 && NextPos.position.y < 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y + NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+
+                    print("case3)");
+                }
+            }
+
+            else if ((CurrentPos.position.x < 0 && NextPos.position.x < 0)
+                    && (CurrentPos.position.y < 0 && NextPos.position.y > 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y + NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+
+                    print("case3)");
+                }
+            }
+
+            //if one of the x positions is above 0 while the other is below 0 and
+            //one of the y positions is above 0 while the other is below 0
+
+            else if ((CurrentPos.position.x > 0 && NextPos.position.x < 0) 
+                    && (CurrentPos.position.y > 0 && NextPos.position.y < 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x + NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y + NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+
+                    print("case4.1)");
+                }
+            }
+
+            else if ((CurrentPos.position.x > 0 && NextPos.position.x < 0) 
+                    && (CurrentPos.position.y < 0 && NextPos.position.y > 0) )
+            {
+                if (Mathf.Abs(CurrentPos.position.x + NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y + NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+
+                    print("case4.2)");
+                }
+            }
+
+            else if ((CurrentPos.position.x < 0 && NextPos.position.x > 0)
+                    && (CurrentPos.position.y > 0 && NextPos.position.y < 0) )
+            {
+                if (Mathf.Abs(CurrentPos.position.x + NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y + NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+
+                    print("case4.3)");
+                }
+            }
+
+            else if ((CurrentPos.position.x < 0 && NextPos.position.x > 0)
+                    && (CurrentPos.position.y < 0 && NextPos.position.y > 0))
+            {
+                if (Mathf.Abs(CurrentPos.position.x + NextPos.position.x) <= minimumDistanceX &&
+                    Mathf.Abs(CurrentPos.position.y + NextPos.position.y) <= minimumDistanceY)
+                {
+                    waypointLeft = false;
+                    currentWaypoint++;
+                    NextPos = Waypoints[currentWaypoint];
+                    WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
+
+                    print("case4.4)");
+                }
+            }
+            
         }  
         
         else
         {
+            
             return;
         }
     }
@@ -102,9 +361,14 @@ public class EnemyNavigation : MonoBehaviour
         }
 
 
-        else if (CurrentDirection > 10)
+        else if (CurrentDirection > 10 && waypointLeft == true)
         {
             enemyrb.rotation += (steeringPower * CurrentDirection) / 20;
+        }
+
+        else if (CurrentDirection > 10 && waypointLeft == false)
+        {
+            enemyrb.rotation -= (steeringPower * CurrentDirection) / 20;
         }
 
     }
@@ -113,5 +377,14 @@ public class EnemyNavigation : MonoBehaviour
     public void SetWaypointList ( List<Transform> WaypointList)
     {
         Waypoints = WaypointList;
+    }
+
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision == WaypointCollider)
+        {
+            waypointLeft = true;
+        }
     }
 }
