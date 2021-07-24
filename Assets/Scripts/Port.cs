@@ -10,6 +10,7 @@ public class Port : MonoBehaviour
     float radius = 5f;
 
     Transform player;
+    PlayerManager manager;
 
     [SerializeField]
     Transform spaceBar;
@@ -19,12 +20,26 @@ public class Port : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<ShipMovement>().GetComponent<Transform>();
+        manager = FindObjectOfType<ShipMovement>().GetComponent<PlayerManager>();
         spaceBar.localScale = new Vector3(0f, 0f, 0f);
     }
 
     void Update()
     {
-        if (isNearPort())
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (IsNearPort())
+            {
+                if (manager.GetPlayerGold() >= 10)
+                {
+                    Debug.Log("no");
+                    manager.ChangePlayerAmmo(10);
+                    manager.ChangePlayerHealth(10);
+                    manager.ChangePlayerGold(-10);
+                }
+            }
+        }
+        if (IsNearPort())
         {
             if (!hasTweened)
             {
@@ -44,7 +59,7 @@ public class Port : MonoBehaviour
     IEnumerator TweenAway()
     {
         yield return new WaitForSeconds(1f);
-        if (! isNearPort())
+        if (! IsNearPort())
         {
             if (hasTweened)
             {
@@ -54,7 +69,7 @@ public class Port : MonoBehaviour
         }
     }
 
-    bool isNearPort()
+    bool IsNearPort()
     {
         return Vector2.Distance(player.transform.position, transform.position) < radius;
     }

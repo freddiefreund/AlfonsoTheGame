@@ -291,6 +291,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 593092979}
     - target: {fileID: 1817453684, guid: ac9269bfee5d5b54ebcde18d3bf4a07a, type: 3}
+      propertyPath: startGold
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817453684, guid: ac9269bfee5d5b54ebcde18d3bf4a07a, type: 3}
       propertyPath: HealthText
       value: 
       objectReference: {fileID: 1753469905}
