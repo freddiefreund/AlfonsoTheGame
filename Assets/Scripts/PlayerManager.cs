@@ -56,6 +56,7 @@ public class PlayerManager : MonoBehaviour
     public void ChangePlayerGold(int changeVal)
     {
         gold += changeVal;
+        UpdateGoldText();
     }
 
     public int GetPlayerAmmo()
