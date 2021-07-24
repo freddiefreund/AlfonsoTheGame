@@ -41,10 +41,12 @@ public class ShipMovement : MonoBehaviour
         rb.AddRelativeForce(-Vector2.right * rb.velocity.magnitude * steeringAmount / 2);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("Collision detected");
         if (other.gameObject.CompareTag("Obstacle"))
         {
+            Debug.Log("hit Obstacle");
             ChangePlayerHealth(-1);
         }
     }
