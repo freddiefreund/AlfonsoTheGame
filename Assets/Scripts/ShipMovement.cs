@@ -36,11 +36,3 @@ public class ShipMovement : MonoBehaviour
     }
     
 }
-
-public void SetWayPoints(List<Transform> WaypointList)
-{
-    Waypoints = WaypointList;
-}
-
-if (Waypoints[0] == null)
-    return;
