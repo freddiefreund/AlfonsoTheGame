@@ -8,10 +8,16 @@ public class PlayerManager : MonoBehaviour
 {
     private HealthScript healthScript;
     private PlayerAmmo ammoScript;
+    [SerializeField] private GameObject loot;
+    [Range(1, 100)]
+    [SerializeField] private int _getLootMinTreshold = 50;
     [SerializeField] private TextMeshProUGUI AmmoText;
     [SerializeField] private TextMeshProUGUI HealthText;
     [SerializeField] private TextMeshProUGUI GoldText;
     [SerializeField] private int startGold;
+    [SerializeField] private RewardListener _listener;
+    [SerializeField] private Reward _rewards;
+
     private int gold;
 
     private void Awake()
@@ -23,18 +29,60 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-         UpdateHealthText();
-         UpdateAmmoText();
-         UpdateGoldText();
+        if (healthScript.isMainShip())
+        {
+            UpdateHealthText();
+            UpdateAmmoText();
+            UpdateGoldText();
+        }
+    }
+
+    public void Rewarded()
+    {
+        // Signal our rewards.
+        _listener.SignalReward(_rewards);
+
+        // Prevents signaling this reward as gained again.
+        //Destroy(this);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collision detected");
+        Debug.Log("Collision detected: " + other.gameObject.name );
+
+        Collider2D colider = other.collider;
+        Debug.Log("Colider " + colider.tag);
+        if (colider.tag == "Bullet")
+        {
+            Debug.Log("Hit by a bullet!");
+            Bullet bullet = colider.gameObject.GetComponent(typeof(Bullet)) as Bullet;
+            healthScript.TakeDamage(bullet.getDamage());
+            UpdateHealthText();
+            Destroy(colider.gameObject);
+        }
+
         if (other.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("hit Obstacle");
             ChangePlayerHealth(-1);
+            Debug.Log(gameObject.name + " has health: " + GetPlayerHealth());
+        }
+
+        if (GetPlayerHealth() <= 0 && !healthScript.isMainShip())
+        {
+            int random = UnityEngine.Random.Range(1, 100);
+            if (random > _getLootMinTreshold)
+            {
+                GameObject tmpObj = Instantiate(loot);
+                tmpObj.transform.position = gameObject.transform.position;
+                
+            }
+            Destroy(gameObject);
+            Rewarded();
+        }
+        else if (GetPlayerHealth() <= 0)
+        {
+            //TODO respwan
         }
     }
 
@@ -72,17 +120,26 @@ public class PlayerManager : MonoBehaviour
     
     private void UpdateAmmoText()
     {
-        AmmoText.text = "Ammo: " + ammoScript.GetAmmo();
+        if (healthScript.isMainShip())
+        {
+            AmmoText.text = "Ammo: " + ammoScript.GetAmmo();
+        }
     }
     
     private void UpdateHealthText()
     {
-        HealthText.text = "Health: " + healthScript.GetHealth();
+        if (healthScript.isMainShip())
+        {
+            HealthText.text = "Health: " + healthScript.GetHealth();
+        }
     }
 
     private void UpdateGoldText()
     {
-        GoldText.text = "Gold: " + gold;
+        if (healthScript.isMainShip())
+        {
+            GoldText.text = "Gold: " + gold;
+        }
         
     }
 }

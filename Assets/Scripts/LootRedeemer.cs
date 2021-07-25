@@ -14,17 +14,18 @@ public class LootRedeemer : MonoBehaviour
         // Signal our rewards.
         _listener.SignalReward(_reward);
 
-        // Prevents signaling this task as completed again.
-        Destroy(this);
+        // Prevents signaling this reward as gained agian.
+        //Destroy(this);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(collision.collider.name);
-        if (collision.gameObject.name == "ship")
+        Debug.Log("GameObject name: " + gameObject.name);
+        Debug.Log("Collider tag: " + collider.gameObject.tag);
+        if (collider.gameObject.tag == "Player")
         {
-            Rewarded();
             Destroy(gameObject);
+            Rewarded();
         }
     }
 }

@@ -276,9 +276,11 @@ GameObject:
   - component: {fileID: 1817453678}
   - component: {fileID: 1817453684}
   - component: {fileID: 1817453685}
+  - component: {fileID: -8131449161642097883}
+  - component: {fileID: 6664051164352819450}
   m_Layer: 0
   m_Name: ship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,7 +404,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.32169592}
+  m_Offset: {x: 0.04066944, y: -0.1386838}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -413,7 +415,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.6433918}
+  m_Size: {x: 2.8707905, y: 7.2964334}
   m_EdgeRadius: 0
 --- !u!114 &1817453678
 MonoBehaviour:
@@ -427,12 +429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11350f9a7e3f03d418dfe308b32859a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loot: {fileID: 0}
-  lootRandomTreshold: 50
-  maxHealth: 10
-  mainShip: 0
-  _listener: {fileID: 0}
-  _rewards: {fileID: 0}
+  maxHealth: 50
+  mainShip: 1
 --- !u!114 &1817453684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,10 +443,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58372b54f93adb4398c0d64340fcc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loot: {fileID: 0}
+  _getLootMinTreshold: 30
   AmmoText: {fileID: 0}
   HealthText: {fileID: 0}
   GoldText: {fileID: 0}
   startGold: 0
+  _listener: {fileID: 0}
+  _rewards: {fileID: 0}
 --- !u!114 &1817453685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +463,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4f72744180f804594673fa81139516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 10
+  maxAmmo: 100
+--- !u!114 &-8131449161642097883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5904042174101439725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f1e864dee364fd1bbd8aedc481d940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6664051164352819450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5904042174101439725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607ee52aba33a462bb216f020354ee3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listener: {fileID: -8131449161642097883}
+  gpTextMeshPro: {fileID: 0}
 --- !u!1001 &5196270987287399041
 PrefabInstance:
   m_ObjectHideFlags: 0

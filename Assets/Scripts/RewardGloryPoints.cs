@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RewardGloryPoints : MonoBehaviour
@@ -7,6 +8,7 @@ public class RewardGloryPoints : MonoBehaviour
     private int _gloryPoints = 0;
 
     [SerializeField] private RewardListener _listener;
+    [SerializeField] private TextMeshProUGUI gpTextMeshPro;
 
     private void OnEnable()
     {
@@ -23,8 +25,8 @@ public class RewardGloryPoints : MonoBehaviour
 
     private void ProcessRewards(Reward rewards)
     {
-        _gloryPoints = rewards.gloryPoints;
+        _gloryPoints += rewards.gloryPoints;
         Debug.Log("We have this many points: " + _gloryPoints);
-        // update UI?
+        gpTextMeshPro.text = "GP: " + _gloryPoints;
     }
 }

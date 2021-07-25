@@ -37,8 +37,11 @@ public class EnemySpawner : MonoBehaviour
            case 1: randomRoute = RouteB;
                break;
         }
-        createdEnemy = Instantiate(EnemyPrefab, randomRoute[0].position, Quaternion.identity);
-        enemyScript = createdEnemy.GetComponent<EnemyNavigation>();
-        enemyScript.SetWaypointList(randomRoute);
+        if (EnemyPrefab != null)
+        {
+            createdEnemy = Instantiate(EnemyPrefab, randomRoute[0].position, Quaternion.identity);
+            enemyScript = createdEnemy.GetComponent<EnemyNavigation>();
+            enemyScript.SetWaypointList(randomRoute);
+        }
     }
 }

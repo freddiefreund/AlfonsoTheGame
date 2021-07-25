@@ -4,21 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Island
-<<<<<<< HEAD
   - Waypoints
-=======
-  - Obstacle
   - Bullet
->>>>>>> db0c2efb058122afa6fba68231eba77f5a925098
+  - Obstacle
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
-  - 
+  - Loot
   - 
   - 
   - 

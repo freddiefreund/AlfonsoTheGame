@@ -60,8 +60,8 @@ public class EnemyNavigation : MonoBehaviour
     //If it is already on the next waypoint then set it to the next one.
     void CheckCurrentPos()
     {
-
-        if (Waypoints[0] == null || Waypoints[Waypoints.Count - 1] == null)
+        Debug.Log(Waypoints.Count);
+        if (Waypoints.Count < 1 || Waypoints[0] == null  || Waypoints[Waypoints.Count - 1] == null)
         {
             return;
         }
@@ -72,9 +72,7 @@ public class EnemyNavigation : MonoBehaviour
             NextPos = Waypoints[1];
         }
 
-        //calculating distance between ship and waypoint to decide if the shif should switch to the next waypoint
-
-        if (Waypoints[currentWaypoint] != null /*&& Waypoints[currentWaypoint+1] != null*/)
+        if(currentWaypoint < Waypoints.Count && Waypoints[currentWaypoint] != null)
         {
             /*
             if (Mathf.Abs(CurrentPos.position.x - NextPos.position.x) <= minimumDistanceX &&
@@ -82,6 +80,10 @@ public class EnemyNavigation : MonoBehaviour
             {
                 waypointLeft = false;
                 currentWaypoint++;
+                if (currentWaypoint == Waypoints.Count)
+                {
+                    currentWaypoint = 0;
+                }
                 NextPos = Waypoints[currentWaypoint];
                 WaypointCollider = Waypoints[currentWaypoint].gameObject.GetComponent<BoxCollider2D>();
                 print("case1.1)");

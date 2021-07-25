@@ -17,10 +17,9 @@ GameObject:
   - component: {fileID: 8032202170627343467}
   - component: {fileID: 8032202170627343466}
   - component: {fileID: 8032202169903976090}
-  - component: {fileID: 7172780382341036227}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EnemyMerchant
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +119,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cd88cfee37487462fa52e2f6ed1b4a8f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c064304532205ee43ae6a7ef05bc48ac, type: 3}
   m_Color: {r: 0.93327296, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,18 +143,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.32169592}
+  m_Offset: {x: -0.021133423, y: -0.12239838}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.94, y: 11.23}
+    oldSize: {x: 4, y: 7}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.6433918}
+  m_Size: {x: 3.3252563, y: 6.076618}
   m_EdgeRadius: 0
 --- !u!114 &8032202170627343473
 MonoBehaviour:
@@ -169,12 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11350f9a7e3f03d418dfe308b32859a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loot: {fileID: 0}
-  lootRandomTreshold: 50
-  maxHealth: 10
+  maxHealth: 20
   mainShip: 0
-  _listener: {fileID: 0}
-  _rewards: {fileID: 0}
 --- !u!114 &8032202170627343467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,10 +182,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58372b54f93adb4398c0d64340fcc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loot: {fileID: 0}
+  _getLootMinTreshold: 20
   AmmoText: {fileID: 0}
   HealthText: {fileID: 0}
   GoldText: {fileID: 0}
   startGold: 0
+  _listener: {fileID: 0}
+  _rewards: {fileID: 11400000, guid: c6cb3cb34df1d41389bc0cb15d1133e9, type: 2}
 --- !u!114 &8032202170627343466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4f72744180f804594673fa81139516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 10
+  maxAmmo: 20
 --- !u!114 &8032202169903976090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,36 +218,20 @@ MonoBehaviour:
   CurrentDirection: 0
   waypointLeft: 0
   currentWaypoint: 0
-  Waypoints: []
+  Waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   CurrentPos: {fileID: 0}
   NextPos: {fileID: 0}
   steeringPower: 0.4
---- !u!61 &7172780382341036227
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4510146406194128114}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -41.771416, y: -1.001812}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.94, y: 11.23}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 83.36424, y: 119.79987}
-  m_EdgeRadius: 0
 --- !u!1 &5960114514858795234
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +243,7 @@ GameObject:
   - component: {fileID: 4036176671538958775}
   - component: {fileID: 5148794784280994121}
   - component: {fileID: 9049280046940083851}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TutorialUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +322,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5960114514858795234}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc987a1dae08e8a4fa0d92e85e2f63bc, type: 3}
   m_Name: 
@@ -355,7 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8032202170046993353}
   - component: {fileID: 8032202170046993352}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8032202170451368376}
   - component: {fileID: 8032202170451368375}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,12 +552,20 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 6768745295063563334, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2221972431530372015, guid: 3afddc8ffa874485b95ecef9e707506c, type: 3}
+    - target: {fileID: 6768745295063563334, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
       propertyPath: shootKey
-      value: 101
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6768745295063563335, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
       propertyPath: m_Name
       value: CanonRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6768745295063563335, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6768745295063563329, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
@@ -643,9 +634,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6768745295063563334, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2221972431530372015, guid: 3afddc8ffa874485b95ecef9e707506c, type: 3}
+    - target: {fileID: 6768745295063563334, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
+      propertyPath: shootKey
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6768745295063563335, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
       propertyPath: m_Name
       value: CanonLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 6768745295063563335, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6768745295063563329, guid: 0e7c4ad9ca863f144870cb221c7961c7, type: 3}

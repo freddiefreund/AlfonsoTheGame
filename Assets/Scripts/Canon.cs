@@ -20,7 +20,7 @@ public class Canon : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(shootKey))
+        if (Input.GetKeyDown(shootKey) || bullet.isAutoAttackOn())
         {
             Debug.Log("shoot");
             if (player.GetPlayerAmmo() > 0)
